@@ -1,10 +1,10 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Syntax";
 }
 
 <script type="text/javascript">
     function MyFunction() {
-        alert("hi");
+        
         var data = {
             focus: $('#test').val(),
             context: "what"
@@ -25,13 +25,42 @@
         return false;
     }
 </script>
+
+<style>
+    .fileUpload {
+    position: relative;
+    overflow: hidden;
+    margin: 0px;
+}
+.fileUpload input.upload {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
+}
+</style>
+
 <div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+    <h1>SYNTAX</h1>
+
+    <p class="lead">SYNTAX is a web-based contextual search application.</p>
+
+    <div class="fileUpload btn btn-primary">
+        <span>Upload .txt File</span>
+        <input type="file" class="upload" />
+    </div>
+
 </div>
 
-Test:
-<input type="text" id="test" />
+Focus:
+<input type="text" id="Focus" />
 
-<button type="button" onclick="MyFunction()">Submit</button>
+Context:
+<input type="text" id="Context" />
+
+<button type="button" onclick="MyFunction()">Search</button>
