@@ -56,6 +56,7 @@ namespace Syntax.Controllers
             LinguisticWeb ling = new LinguisticWeb("hi");
 
             var langTree = ling.Main();
+            var wordArray = langTree[0].getWord();
 
             return View();
         }
@@ -173,6 +174,21 @@ namespace Syntax.Controllers
                     break;
                 }
             }
+        }
+
+        public List<String> getWord()
+        {
+            List<String> result = new List<String>();
+            if (children.Count == 0)
+            {
+                result.Add(word);
+                return result;
+            }
+            foreach (var child in children)
+            {
+                result = result.Concat(child.getWord()).ToList();
+            }
+            return result;
         }
     }
 }
