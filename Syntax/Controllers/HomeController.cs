@@ -55,7 +55,7 @@ namespace Syntax.Controllers
         {
             LinguisticWeb ling = new LinguisticWeb("hi");
 
-            ling.Main();
+            var langTree = ling.Main();
 
             return View();
         }
@@ -70,12 +70,12 @@ namespace Syntax.Controllers
             this.fileText = fileText;
         }
 
-        public void Main()
+        public List<LangTree> Main()
         {
-            RunAsync().Wait();
+            return RunAsync();
         }
 
-        async Task RunAsync()
+        List<LangTree> RunAsync()
         {
             List<LangTree> sentenceList = new List<LangTree>();
 
@@ -91,7 +91,7 @@ namespace Syntax.Controllers
                 string inputJson= @"{" +
                     "'language' : 'en'," +
                     "'analyzerIds' : ['22a6b758-420f-4745-8a3c-46835a67c0d2']," +
-                    "'text' : 'There was a dog. It was happy.\n There was a dog. It went on a walk.Rufus went on a walk.It was a dog. It is happy.'" + "}";
+                    "'text' : 'There was a dog. It was happy. There was a dog. It went on a walk. Rufus went on a walk. It was a dog. It is happy.'" + "}";
                 streamWriter.Write(inputJson);
                 streamWriter.Flush();
                 streamWriter.Close();
@@ -111,14 +111,16 @@ namespace Syntax.Controllers
                 {
                     sentenceList.Add(new LangTree(((JValue)sent).ToString()));
                 }
-            }            
+            }
+
+            return sentenceList;
         }
     }
 
-    class LangTree {
-        string tag;
-        string word;
-        List<LangTree> children;
+    public class LangTree {
+        public string tag;
+        public string word;
+        public List<LangTree> children;
 
         public LangTree(string words)
         {
