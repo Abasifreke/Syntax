@@ -24,6 +24,7 @@
         });
         return false;
     }
+
 </script>
 
 <style>
@@ -50,9 +51,9 @@
 
     <p class="lead">SYNTAX is a web-based contextual search application.</p>
 
-    <div class="fileUpload btn btn-primary">
+    <div class="fileUpload btn btn-primary" action="" method="post" enctype="multipart/form-data">
         <span>Upload .txt File</span>
-        <input type="file" class="upload" />
+        <input type="file" class="upload" name="file" id="file" />
     </div>
 
 </div>
@@ -62,5 +63,38 @@ Focus:
 
 Context:
 <input type="text" id="Context" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <button type="button" onclick="MyFunction()">Search</button>
