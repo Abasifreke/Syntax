@@ -12,5 +12,7 @@ namespace LinguisticLogic
         public Analysis()
         {
         }
+
+
     }
 }

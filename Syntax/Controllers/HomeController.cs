@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Syntax.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -23,6 +24,13 @@ namespace Syntax.Controllers
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AnalyzeText(SearchInput data)
+        {
 
             return View();
         }

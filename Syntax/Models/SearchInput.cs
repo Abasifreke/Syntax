@@ -8,8 +8,8 @@ namespace Syntax.Models
 {
     public class SearchInput
     {
-        string focus;
-        string context;
+        public string focus { get; set; }
+        public string context { get; set; }
         //File fileName;
     }
 }
