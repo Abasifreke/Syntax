@@ -7,7 +7,7 @@
         
         var data = {
             focus: $('#Focus').val(),
-            context: "what"
+            context: $('#Context').val()
         };
         $.ajax({
             url: "/Home/AnalyzeText",
@@ -16,10 +16,11 @@
             contentType: 'application/json',
             data: JSON.stringify(data),
             success: function (result) {
+                $('#Results')[0].value = result.responseText;
                 alert('Success');
             },
             error: function (result) {
-                alert('Failed');
+                $('#Results')[0].value = result.responseText;
             }
         });
         return false;
@@ -58,43 +59,32 @@
 
 </div>
 
-Focus:
-<input type="text" id="Focus" />
+<div class="container">
+    <h2>Interface</h2>
+    <form role="form">
+        <div class="form-group">
+            <label for="Focus">Focus Word:</label>
+            <input type="text" class="form-control" id="Focus" />
+        </div>
+        <div class="form-group">
+            <label for="Context">Text Input:</label>
+            <textarea type="text" class="form-control" id="Context"></textarea>
+        </div>
+        <button type="button" onclick="MyFunction()" class="btn btn-default">Search</button>
+    </form>
 
-Context:
-<input type="text" id="Context" />
+    @*<div class="form-group">
+            Focus:
+            <input type="text" id="Focus" />
+        </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        Text:
+        <textarea type="text" id="Context"> </textarea>*@
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<button type="button" onclick="MyFunction()">Search</button>
+    <br />
+    <div class="form-group">
+        <label for="Results">Primary Context:</label>
+        <textarea type="text" class="form-control" id="Results"></textarea>
+    </div>
+</div>

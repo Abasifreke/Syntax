@@ -63,16 +63,30 @@ namespace Syntax.Models
             {
                 return null;
             }
-            if (focusTag.Equals("NN"))
+            if (focusTag.Contains("N"))
             {
                 foreach(var leaf in listOfLeaf)
                 {
-                    if (leaf.tag.Equals("VBD") && !leaf.word.Equals("was", StringComparison.OrdinalIgnoreCase) && !leaf.word.Equals("is", StringComparison.OrdinalIgnoreCase))
+                    if (leaf.tag.Contains("N") && leaf.word != focusWord)
+                    {
+                        return leaf.word;
+                    }
+                    else if (leaf.tag.Equals("VBD") && !leaf.word.Equals("was", StringComparison.OrdinalIgnoreCase))
+                    {
+                        return leaf.word;
+                    }
+                    else if (leaf.tag == "VBZ" && !leaf.word.Equals("is", StringComparison.OrdinalIgnoreCase))
+                    {
+                        return leaf.word;
+                    }
+                    else if (leaf.tag == "VBG")
                     {
                         return leaf.word;
                     }
                     else if (leaf.tag.Equals("JJ"))
+                    {
                         return leaf.word;
+                    }
                    
                 }
             }
@@ -92,12 +106,12 @@ namespace Syntax.Models
             this.fileText = fileText;
         }
 
-        public List<LangTree> Main()
+        public List<LangTree> Main(string input)
         {
-            return RunAsync();
+            return RunAsync(input);
         }
 
-        List<LangTree> RunAsync()
+        List<LangTree> RunAsync(string input)
         {
             List<LangTree> sentenceList = new List<LangTree>();
 
@@ -113,7 +127,7 @@ namespace Syntax.Models
                 string inputJson = @"{" +
                     "'language' : 'en'," +
                     "'analyzerIds' : ['22a6b758-420f-4745-8a3c-46835a67c0d2']," +
-                    "'text' : 'There was a dog. It was happy. There was a dog. It went on a walk. Rufus went on a walk. It was a dog. It is happy.'" + "}";
+                    "'text' : '" + input + ".'" + "}";
                 streamWriter.Write(inputJson);
                 streamWriter.Flush();
                 streamWriter.Close();

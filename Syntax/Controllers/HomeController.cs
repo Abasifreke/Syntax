@@ -46,19 +46,20 @@ namespace Syntax.Controllers
         }
 
         [HttpPost]
-        public ActionResult AnalyzeText(SearchInput data)
+        public string AnalyzeText(SearchInput data)
         {
             LinguisticWeb ling = new LinguisticWeb("hi");
 
-            var langTree = ling.Main();
+            var langTree = ling.Main(data.context);
 
             ContextLogic contxtLogic = new ContextLogic(langTree);
 
-            contxtLogic.getContext(data.focus);
+            String result = contxtLogic.getContext(data.focus);
 
             //var wordArray = langTree[0].getWord();
 
-            return View();
+            return result;
+
         }
     }
 }
